@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls.Shapes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,11 +13,11 @@ namespace Assignment2.Data
 	internal class FlightManager
 	{
 		//constants for Flights file and Airports file
-		private const string FLIGHTS_TXT = @"C:\Users\zGood\source\repos\Assignment2\Assignment2\Resources\Files\Flights.txt";
-		private const string AIRPORTS_TXT = @"C:\Users\zGood\source\repos\Assignment2\Assignment2\Resources\Files\Airports.txt";
+		private const string FLIGHTS_CSV = @"C:\Users\V\Documents\GitHub\OP_Assignment2\flights.csv";
+        private const string AIRPORTS_CSV = @"C:\Users\V\Documents\GitHub\OP_Assignment2\aiports.csv";
 
-		//list creation for the text files
-		public static List<Flight> flightList = new List<Flight>();
+        //list creation for the text files
+        public static List<Flight> flightList = new List<Flight>();
 		public static List<Airport> airportList = new List<Airport>();
 
 		//constructor to populate the lists
@@ -29,7 +30,7 @@ namespace Assignment2.Data
 		private void populateLists() 
 		{
 			Flight flight;
-			foreach(string line in System.IO.File.ReadAllLines(FLIGHTS_TXT)) 
+			foreach(string line in System.IO.File.ReadAllLines(FLIGHTS_CSV)) 
 			{
 				//how to split
 				string[] flightData = line.Split(",");
@@ -49,7 +50,7 @@ namespace Assignment2.Data
 			}
 
 			Airport airport;
-			foreach(string line in System.IO.File.ReadAllLines(AIRPORTS_TXT))
+			foreach(string line in System.IO.File.ReadAllLines(AIRPORTS_CSV))
 			{
 				//how to split
 				string[] airportData = line.Split(",");

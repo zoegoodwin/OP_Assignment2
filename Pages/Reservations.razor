@@ -1,0 +1,143 @@
+﻿@page "/reservations"
+@using Assignment2.Data
+
+@* RESERVATIONS *@
+<div id="reservsTop" class="flex">
+    <div id="reservations" class="flex">
+        <div id="reservsTableHeader" class="flex">
+            <h3>Reservations</h3>
+        </div>
+        <div id="reservsTable" class="flex">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Flight</th>
+                        <th>Airline</th>
+                        <th>Cost</th>
+                        <th>Name</th>
+                        <th>Citizenship</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody class="ft-body">
+                    @*@foreach (var flight in flights) //@flight.code, @flight.airline etc.
+                    {*@
+                    <tr>
+                        <td>LNNNN</td>
+                        <td>LL-NNNN</td>
+                        <td>Air Canada</td>
+                        <td>$300.00</td>
+                        <td>John Smith</td>
+                        <td>Canadian</td>
+                        <td>Active</td>
+                    </tr>
+                    @*}*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* RESERVE *@
+    <div id="reserve" class="flex">
+        <div id="reserveHeader" class="flex">
+            <h3>Reserve</h3>
+        </div>
+        <div class="flex">
+            <label for="code" class="res-lcol">Code:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="flight" class="res-lcol">Flight:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="airline" class="res-lcol">Airline:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="cost" class="res-lcol">Cost:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="citiz" class="res-lcol">Citizenship:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div class="flex">
+            <label for="name" class="res-lcol">Name:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div class="flex">
+            <label for="citz" class="res-lcol">Citizenship:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-default">Reserve</button>
+        </div>
+    </div>
+
+
+    @* SEARCH *@
+
+    <div id="resFinder" class="flex">
+        <div id="resFinderHeader" class="flex">
+            <h3>Flight Finder</h3>
+        </div>
+
+        @*text input for 'CODE'*@
+        <div class="from-dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="fromMenu" data-toggle="dropdown">
+                From
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="fromMenu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YYC</a></li> @* placeholders until a proper list is used*@
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YEG</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YVR</a></li>
+            </ul>
+        </div>
+
+        @*text input for 'AIRLINE'*@
+        <div class="to-dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="toMenu" data-toggle="dropdown">
+                To
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="toMenu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YYC</a></li> @* placeholders until a proper list is used*@
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YEG</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YVR</a></li>
+            </ul>
+        </div>
+
+        @*text input for 'NAME'*@
+        <div class="day-dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dayMenu" data-toggle="dropdown">
+                Day
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sunday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Monday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuesday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Wednesday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thursday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Friday</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Saturday</a></li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-default rf-btn">Find Reservations</button>
+    </div>
+
+</div>
+
+
+
+
+@code {
+
+}

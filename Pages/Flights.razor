@@ -1,0 +1,155 @@
+﻿@page "/flights"
+@using Assignment2.Data
+
+@*list the available flights from the text file*@
+<div id="flightsTop" class="flex">
+        <div id="flights" class="flex">
+            <div id="flightsTableHeader" class="flex">
+                <h3>Flights</h3>
+            </div>
+            <div id="flightsTable" class="flex">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Airline</th>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Weekday</th>
+                            <th>Time</th>
+                            <th>Seats</th>
+                            <th>Cost/Seat</th>
+                        </tr>
+                    </thead>
+                    <tbody class="ft-body">
+                        @foreach (var f in flightList)
+                        {
+                            <tr>
+                                <td>@flightList[0]</td>
+                                <td>@flightList[1]</td>
+                                <td>@flightList[2]</td>
+                                <td>@flightList[3]</td>
+                                <td>@flightList[4]</td>
+                                <td>@flightList[5]</td>
+                                <td>@flightList[6]</td>
+                                <td>@flightList[7]</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+@* RESERVE *@
+    <div id="reserve" class="flex">
+        <div id="reserveHeader" class="flex">
+            <h3>Reserve</h3>
+        </div>
+        <div class="flex">
+            <label for="flight" class="res-lcol">Flight:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="airline" class="res-lcol">Airline:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="day" class="res-lcol">Day:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="time" class="res-lcol">Time:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+        <div class="flex">
+            <label for="cost" class="res-lcol">Cost:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div class="flex">
+            <label for="name" class="res-lcol">Name:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div class="flex">
+            <label for="citz" class="res-lcol">Citizenship:</label>
+            <input type="text" class="res-rcol" />
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-default btn-reserve">Reserve</button>
+        </div>
+    </div>
+
+
+@* FLIGHTFINDER *@ 
+    <div id="flightFinder" class="flex">
+        <div id="flightFinderHeader" class="flex">
+            <h3>Flight Finder</h3>
+        </div>
+
+        @*dropdown for 'FROM'*@
+        <div class="from-dropdown flex">
+            <label class="ff-lcol">From: </label>
+            <select class="ff-rcol" @onchange = "ShowAirport">
+                <option>Select an Origin</option>
+                @foreach(var a in airportList)
+                {
+                    <option value = "@a.Name">@a.Name</option>
+                }
+            </select>
+        </div>
+
+        @*dropdown for 'TO'*@
+        <div class="to-dropdown flex">
+            <label class="ff-lcol">To: </label>
+            <select class="ff-rcol" @onchange="ShowAirport">
+                <option>Select a Destination</option>
+                @foreach (var a in airportList)
+                {
+                    <option value="@a.Name">@a.Name</option>
+                }
+            </select>
+        </div>
+
+        @*dropdown for 'DAY'*@
+        <div class="day-dropdown flex">
+            <label class="ff-lcol">Day: </label>
+            <select class="ff-rcol">
+                <option>Select a Day</option>
+                <option>Sunday</option>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-default ff-btn">Find Flights</button>
+    </div>
+
+</div>
+
+
+@code {
+    FlightManager fm = new FlightManager();
+    List<Flight> flightList = FlightManager.GetFlights();
+    List<Airport> airportList = FlightManager.GetAirports();
+    string selectedFlight;
+    string selectedAirport;
+
+    private void ShowFlight(ChangeEventArgs f)
+    {
+        selectedFlight = f.Value.ToString();
+    }
+
+    private void ShowAirport(ChangeEventArgs a)
+    {
+        selectedAirport = a.Value.ToString();
+    }
+
+
+
+}

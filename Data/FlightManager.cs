@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.Maui.Controls.Shapes;
+using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace Assignment2.Data
 	{
 		//constants for Flights file and Airports file
 		private const string FLIGHTS_CSV = @"C:\Users\V\Documents\GitHub\OP_Assignment2\flights.csv";
-        private const string AIRPORTS_CSV = @"C:\Users\V\Documents\GitHub\OP_Assignment2\aiports.csv";
+        private const string AIRPORTS_CSV = @"C:\Users\V\Documents\GitHub\OP_Assignment2\airports.csv";
 
         //list creation for the text files
         public static List<Flight> flightList = new List<Flight>();
@@ -77,15 +78,53 @@ namespace Assignment2.Data
 		}
 
 		//public const string Any = "Any" FOR WEEKDAYS, OR ENUM
+		public const string Any = "Any"; 
 
 		//find airport by code.
-
+		public static Airport findAirportByCode(List<Airport> aList, string inputCode)
+		{
+			//Every airport in the airport list 
+			foreach(Airport airport in aList) 
+			{ 
+				if (airport.Code == inputCode)
+				{
+					return airport;
+				}
+			}
+			return null;
+			
+		}
 
 		//find flight by code, param flight code, return flight object
+		public static Flight findFlightByCode (List<Flight> fList, string inputCode) 
+		{
+            //Every flight in the flight list 
+            foreach (Flight flight in fList)
+            {
+                if (flight.Code == inputCode)
+                {
+                    return flight;
+                }
+            }
+            return null;
+        }
 
 
 		//find flight going from A to B on specific day; param from airport code, param to airport code, param weekday; return flight code
+		public static string findFlightByRange (List<Flight> fList, Airport startAirport, Airport endAirport, string weekday)
+		{
+			//Every flight in the flight list 
+			foreach (Flight flight in fList)
+			{
+				//If the from matches start airport code and to ends endairport code
+				if ((flight.From == startAirport.Code) && (flight.To == endAirport.Code) && (flight.Weekday == weekday)) 
+				{
+					return flight.Code;
+				}
+			}
+			return null;
+		}
 
-				
-	}
+
+    }
 }

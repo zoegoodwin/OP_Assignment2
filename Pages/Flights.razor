@@ -22,17 +22,17 @@
                         </tr>
                     </thead>
                     <tbody class="ft-body">
-                        @foreach (var f in flightList)
+                        @foreach (var flight in flightList)
                         {
                             <tr>
-                                <td>@flightList[0]</td>
-                                <td>@flightList[1]</td>
-                                <td>@flightList[2]</td>
-                                <td>@flightList[3]</td>
-                                <td>@flightList[4]</td>
-                                <td>@flightList[5]</td>
-                                <td>@flightList[6]</td>
-                                <td>@flightList[7]</td>
+                                <td>@flight.Code</td>
+                                <td>@flight.Airline</td>
+                                <td>@flight.From</td>
+                                <td>@flight.To</td>
+                                <td>@flight.Weekday</td>
+                                <td>@flight.Time</td>
+                                <td>@flight.Seats</td>
+                                <td>@flight.CostPerSeat</td>
                             </tr>
                         }
                     </tbody>
@@ -90,31 +90,31 @@
 
         @*dropdown for 'FROM'*@
         <div class="from-dropdown flex">
-            <label class="ff-lcol">From: </label>
+            <label class="ff-lcol" @bind="fromInput">From: </label>
             <select class="ff-rcol" @onchange = "ShowAirport">
                 <option>Select an Origin</option>
                 @foreach(var a in airportList)
                 {
-                    <option value = "@a.Name">@a.Name</option>
+                    <option value = "@a.Code">@a.Code</option>
                 }
             </select>
         </div>
 
         @*dropdown for 'TO'*@
         <div class="to-dropdown flex">
-            <label class="ff-lcol">To: </label>
+            <label class="ff-lcol" @bind="toInput">To: </label>
             <select class="ff-rcol" @onchange="ShowAirport">
                 <option>Select a Destination</option>
                 @foreach (var a in airportList)
                 {
-                    <option value="@a.Name">@a.Name</option>
+                    <option value="@a.Code">@a.Code</option>
                 }
             </select>
         </div>
 
         @*dropdown for 'DAY'*@
         <div class="day-dropdown flex">
-            <label class="ff-lcol">Day: </label>
+            <label class="ff-lcol" @bind="weekdayInput">Day: </label>
             <select class="ff-rcol">
                 <option>Select a Day</option>
                 <option>Sunday</option>
@@ -127,7 +127,7 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-default ff-btn">Find Flights</button>
+        <button type="submit" class="btn btn-default ff-btn" Clicked="Find_Flight">Find Flights</button>
     </div>
 
 </div>
@@ -137,8 +137,11 @@
     FlightManager fm = new FlightManager();
     List<Flight> flightList = FlightManager.GetFlights();
     List<Airport> airportList = FlightManager.GetAirports();
-    string selectedFlight;
-    string selectedAirport;
+    public string selectedFlight;
+    public string selectedAirport;
+    public string fromInput;
+    public string toInput;
+    public string weekdayInput; 
 
     private void ShowFlight(ChangeEventArgs f)
     {
@@ -151,5 +154,9 @@
     }
 
 
-
+    //Button function
+    private async void Find_Flight(object sender, EventArgs e)
+    {
+       
+    }
 }

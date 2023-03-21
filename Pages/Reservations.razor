@@ -1,5 +1,6 @@
 ﻿@page "/reservations"
 @using Assignment2.Data
+@inject ReservationManager reservationManager
 
 @* RESERVATIONS *@
 <div id="reservsTop" class="flex">
@@ -23,15 +24,18 @@
                 <tbody class="ft-body">
                     @*@foreach (var flight in flights) //@flight.code, @flight.airline etc.
                     {*@
-                    <tr>
-                        <td>LNNNN</td>
-                        <td>LL-NNNN</td>
-                        <td>Air Canada</td>
-                        <td>$300.00</td>
-                        <td>John Smith</td>
-                        <td>Canadian</td>
-                        <td>Active</td>
-                    </tr>
+                    @foreach (var reservation in rList)
+                    {
+                        <tr>
+                            <td>@reservation.Code</td>
+                            <td>@reservation.Flight</td>
+                            <td>@reservation.Airline</td>
+                            <td>@reservation.Cost</td>
+                            <td>@reservation.Name</td>
+                            <td>@reservation.Citizenship</td>
+                            <td>@reservation.Status</td>
+                        </tr>
+                    }
                     @*}*@
                 </tbody>
             </table>
@@ -60,22 +64,26 @@
             <input type="text" class="res-rcol" />
         </div>
         <div class="flex">
-            <label for="citiz" class="res-lcol">Citizenship:</label>
-            <input type="text" class="res-rcol" />
-        </div>
-
-        <div class="flex">
             <label for="name" class="res-lcol">Name:</label>
             <input type="text" class="res-rcol" />
         </div>
 
         <div class="flex">
-            <label for="citz" class="res-lcol">Citizenship:</label>
+            <label for="citizen" class="res-lcol">Citizenship:</label>
             <input type="text" class="res-rcol" />
+        </div>
+
+        <div class="flex">
+            <label for="status" class="res-lcol">Status:</label>
+            <select class="res-rcol">
+                <option>Active</option>
+                <option>Inactive</option>
+            </select>
         </div>
 
         <div>
             <button type="submit" class="btn btn-default">Reserve</button>
+            <button type="submit" class="btn btn-default">Update</button>
         </div>
     </div>
 
@@ -84,53 +92,28 @@
 
     <div id="resFinder" class="flex">
         <div id="resFinderHeader" class="flex">
-            <h3>Flight Finder</h3>
+            <h3>Search</h3>
         </div>
 
         @*text input for 'CODE'*@
-        <div class="from-dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="fromMenu" data-toggle="dropdown">
-                From
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="fromMenu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YYC</a></li> @* placeholders until a proper list is used*@
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YEG</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YVR</a></li>
-            </ul>
+        <div class="flex">
+            <label for="code" class="res-lcol">Code:</label>
+            <input type="text" class="form-control" @bind="@codeInput"/>
         </div>
 
         @*text input for 'AIRLINE'*@
-        <div class="to-dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="toMenu" data-toggle="dropdown">
-                To
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="toMenu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YYC</a></li> @* placeholders until a proper list is used*@
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YEG</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">YVR</a></li>
-            </ul>
+        <div class="flex">
+            <label for="airline" class="res-lcol">Airline:</label>
+            <input type="text" class="form-control" @bind="@airlineInput"/>
         </div>
 
         @*text input for 'NAME'*@
-        <div class="day-dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dayMenu" data-toggle="dropdown">
-                Day
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Sunday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Monday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Tuesday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Wednesday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Thursday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Friday</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Saturday</a></li>
-            </ul>
+        <div class="flex">
+            <label for="name" class="res-lcol">Name:</label>
+            <input type="text" class="form-control" @bind="@nameInput"/>
         </div>
 
-        <button type="submit" class="btn btn-default rf-btn">Find Reservations</button>
+        <button type="submit" class="btn btn-default rf-btn" @onclick="@Find_Res">Find Reservations</button>
     </div>
 
 </div>
@@ -139,5 +122,18 @@
 
 
 @code {
+    List<Reservation> rList = ReservationManager.GetReservations();
+    public string codeInput;
+    public string airlineInput;
+    public string nameInput;
 
+
+    protected async void Find_Res()
+    {
+        await base.OnInitializedAsync();
+        rList = ReservationManager.revertList();
+
+        //Check if only one of them is picked 
+
+    }
 }

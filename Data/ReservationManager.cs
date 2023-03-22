@@ -43,24 +43,43 @@ namespace Assignment2.Data
         {
             rList.Clear();
             populateLists();
-            return rList = GetReservations();
+            return rList;
         }
 
         //make a res; param flight to book, param name of person, param citizenship; return created res. public
-        public static Reservation createRes(string flight, List<Flight> fList, string personName, string citizenship)
+        public static Reservation createRes(string code, string flight, string airline, string cost, string name, string citizenship, string status)
         {
-            //Getting flight information
-            return null;
+            Reservation res = new Reservation(code, flight, airline, cost, name, citizenship, status);
+
+            return res;
 
         }
 
 
-        //find the res by airline or code; param resCode, param airline, param name of person; return res objects. use tostring method
+        //find the res by code; param resCode, return res list
 
+        public static List<Reservation> findResByCode (List<Reservation> rList, string code)
+        {
+            rList = revertList();
 
+            List<Reservation> editedRes = new List<Reservation>();
 
-
-        //find the res by code; param resCode, return res object
-
+            foreach (Reservation r in rList) 
+            { 
+                if (r.Code == code)
+                {
+                    editedRes.Add(r);
+                }
+                if (r.Airline == code)
+                {
+                    editedRes.Add(r);
+                }
+                if (r.Name == code) 
+                {
+                    editedRes.Add(r);
+                }
+            }
+            return editedRes;
+        }
     }
 }

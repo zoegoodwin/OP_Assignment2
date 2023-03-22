@@ -116,7 +116,6 @@
         </div>
 
         <button type="submit" class="btn btn-default rf-btn" @onclick="@Find_Res">Find Reservations</button>
-        <button type="submit" class="btn btn-default rf-btn" @onclick="@Find_Reset">Reset</button>
     </div>
 
 </div>
@@ -143,6 +142,11 @@
     public string tableCode = "";
 
     public string resInput { get; set; }
+
+    protected override void OnInitialized()
+    {
+        ReservationManager.GetReservations();
+    }
 
     public async void addRes()
     {
@@ -172,7 +176,6 @@
     protected async void Find_Res()
     {
         await base.OnInitializedAsync();
-        rList = ReservationManager.revertList();
 
         await base.OnInitializedAsync();
         rList = ReservationManager.findResByCode(rList, codeInput);

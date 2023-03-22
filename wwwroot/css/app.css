@@ -183,29 +183,47 @@ tbody {
     justify-content:flex-start;
 }
 
-#flightFinder .ff-lcol {
+.ff-lcol {
     display: flex;
     width: 100px;
     text-align: right;
 }
 
-#flightFinder .ff-rcol {
+.ff-rcol {
     display: flex;
     width: 800px;
     text-align: left;
 }
 
-.ff-btn,
-.rf-btn {
+.ff-btn{
     width: 115px;
     margin-top: 5px;
 }
 
-/* FLIGHTS.RAZOR STYLING END*/
+.rf-btn {
+    width: 160px;
+    margin-top: 5px;
+}
 
 #reservation .ff-rcol {
     display: flex;
     width: 200px;
     justify-content: left;
     margin-left: 5px;
+}
+
+#reserveButtons {
+    flex-direction: column;
+    text-align: center;
+}
+
+#searchButtons {
+    flex-direction: row;
+    margin-right: 5px;
+    justify-items: start;
+    text-align: center;
+}
+
+.sbtn {
+    width: 80px;
 }

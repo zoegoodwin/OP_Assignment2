@@ -163,6 +163,13 @@ tbody {
     margin-left: 5px;
 }
 
+.res-text {
+    display: flex;
+    width: 1000px;
+    justify-content: left;
+    margin-left: 5px;
+}
+
 #reserve button {
     margin-left: 100px;
     margin-top: 5px;
@@ -195,3 +202,10 @@ tbody {
 }
 
 /* FLIGHTS.RAZOR STYLING END*/
+
+#reservation .ff-rcol {
+    display: flex;
+    width: 200px;
+    justify-content: left;
+    margin-left: 5px;
+}

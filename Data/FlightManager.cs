@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Shapes;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -28,7 +29,7 @@ namespace Assignment2.Data
 		}
 
 		//method to populate Flight and Airport information: NEED TO EMBED FLIGHT AND AIRPORT INTO TRY/CATCH EXCEPTION STMT
-		private void populateLists() 
+		public static void populateLists() 
 		{
 			Flight flight;
 			foreach(string line in System.IO.File.ReadAllLines(FLIGHTS_CSV)) 
@@ -68,7 +69,7 @@ namespace Assignment2.Data
 		//will return the list of flights
 		public static List<Flight> GetFlights()
 		{
-			return flightList;
+            return flightList;
 		}
 
 		//will return the list of airports
@@ -80,51 +81,96 @@ namespace Assignment2.Data
 		//public const string Any = "Any" FOR WEEKDAYS, OR ENUM
 		public const string Any = "Any"; 
 
-		//find airport by code.
-		public static Airport findAirportByCode(List<Airport> aList, string inputCode)
-		{
-			//Every airport in the airport list 
-			foreach(Airport airport in aList) 
-			{ 
-				if (airport.Code == inputCode)
-				{
-					return airport;
-				}
-			}
-			return null;
-			
-		}
 
 		//find flight by code, param flight code, return flight object
-		public static Flight findFlightByCode (List<Flight> fList, string inputCode) 
+		public static List<Flight> findFlightByFrom (List<Flight> fList, string fromCode) 
 		{
+            //Reverts list before search
+            fList = revertList();
+
+            //Edited flight list
+            List<Flight> editedFlightList = new List<Flight>();
+
             //Every flight in the flight list 
             foreach (Flight flight in fList)
             {
-                if (flight.Code == inputCode)
+                if (flight.From == fromCode)
                 {
-                    return flight;
+                    editedFlightList.Add(flight);
                 }
             }
-            return null;
+            return editedFlightList;
+        }
+
+        public static List<Flight> findFlightByTo(List<Flight> fList, string inputCode)
+        {
+            //Reverts list before search
+            fList = revertList();
+
+            //Edited flight list
+            List<Flight> editedFlightList = new List<Flight>();
+
+            //Every flight in the flight list 
+            foreach (Flight flight in fList)
+            {
+                if (flight.To == inputCode)
+                {
+                    editedFlightList.Add(flight);
+                }
+            }
+            return editedFlightList;
+        }
+
+        //find flight by weekday, param flight code, return flight object
+        public static List<Flight> findFlightByWeekday(List<Flight> fList, string weekday)
+        {
+            //Reverts list before search
+            fList = revertList();
+
+            //Edited flight list
+            List<Flight> editedFlightList = new List<Flight>();
+
+            //Every flight in the flight list 
+            foreach (Flight flight in fList)
+            {
+                if (flight.Weekday == weekday)
+                {
+                    editedFlightList.Add(flight);
+                }
+            }
+            return editedFlightList;
         }
 
 
-		//find flight going from A to B on specific day; param from airport code, param to airport code, param weekday; return flight code
-		public static string findFlightByRange (List<Flight> fList, Airport startAirport, Airport endAirport, string weekday)
+        //find flight going from A to B on specific day; param from airport code, param to airport code, param weekday; return flight list
+        public static List<Flight> findFlightByRange (List<Flight> fList, string startAirport, string endAirport, string weekday)
 		{
-			//Every flight in the flight list 
-			foreach (Flight flight in fList)
+            //Reverts list before search
+            fList = revertList();
+
+            //Edited flight list
+            List<Flight> editedFlightList = new List<Flight>();
+
+            //Every flight in the flight list 
+            foreach (Flight flight in fList)
 			{
 				//If the from matches start airport code and to ends endairport code
-				if ((flight.From == startAirport.Code) && (flight.To == endAirport.Code) && (flight.Weekday == weekday)) 
+				if ((flight.From == startAirport) && (flight.To == endAirport) && (flight.Weekday == weekday)) 
 				{
-					return flight.Code;
-				}
+					editedFlightList.Add(flight);
+                }
 			}
-			return null;
-		}
+            return editedFlightList;
 
+        }
+
+		public static List<Flight> revertList()
+		{
+			flightList.Clear();
+            //Reverts list
+            populateLists();
+            return flightList = GetFlights();
+        }
 
     }
 }

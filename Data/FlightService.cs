@@ -10,7 +10,10 @@ namespace Assignment2.Data
     {
         //get the list of flights
 
-
+        public static List<Flight> GetFlights ()
+        {
+            return new List<Flight> ();
+        }
 
         //public Task<Flight> GetFlightAsync(string code, string airline, string from, string to, string weekday, string time, string seats, string costPerSeat) 
         //{
@@ -20,6 +23,7 @@ namespace Assignment2.Data
 
         //    }))
         //}
+
 
 
     }
